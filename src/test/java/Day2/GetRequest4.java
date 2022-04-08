@@ -22,7 +22,7 @@ ve checkin date'in 2018-10-07"
 ve checkout date'in 2020-09-30 oldugunu test edin
      */
 
-String url="  https://restful-booker.herokuapp.com/booking/7";
+String url="https://restful-booker.herokuapp.com/booking/7";
         Response response=given()
                 .accept("application/json")
                 .when()

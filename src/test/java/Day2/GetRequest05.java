@@ -1,6 +1,7 @@
 package Day2;
 
 import io.restassured.response.Response;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
@@ -44,6 +45,15 @@ public class GetRequest05 {
                 .when()
                 .get(url);
         response.prettyPrint();
+
+
+
+    response.then()
+            .statusCode(200)
+            .contentType("application/json")
+            .body("firstname", Matchers.equalTo("Jim"))
+            .body("totalprice",Matchers.equalTo(740))
+            .body("bookingdates.checkin",Matchers.equalTo("2017-07-24"));
 
 
 

@@ -10,46 +10,57 @@ import static io.restassured.RestAssured.given;
 public class GetRequest01 {
 
     /*
-    https://restful-booker.herokuapp.com/booking/3 adresine bir request gonderildiginde
+    https://restful-booker.herokuapp.com/booking adresine bir request gonderildiginde
     donecek cevap(response) icin
 HTTP status kodunun 200
 Content Type’in Json
-Ve Status Line’in HTTP/1.1 200 OK
+Ve Status Line’in
+
+
 Oldugunu test edin
 
    */
 
+@Test
+    public void test(){
 
 
-    @Test
-    public void get1(){
-        // 1- api testi yaparken ilk olarak url(endpoint) belirlenmeli
+    String url ="https://restful-booker.herokuapp.com/booking ";
+    Response response= given().accept(ContentType.JSON)
+            .when()
+            .get(url);
 
-        String url="https://restful-booker.herokuapp.com/booking";
-
-        Response response=given().accept(ContentType.JSON)
-                .when()
-                .get(url);
+  //  response.prettyPrint();
 
 
-        //  response.prettyPrint();
-        //4-actual result oluştur
-        //5-doğrulama yap(assertion)
-
-        System.out.println("status code :"+ response.getStatusCode() );
-        System.out.println("contentype "+ response.contentType());
-        System.out.println("statusline "+ response.statusLine());
-
-        response.then()
-                .contentType("application/json")
-                .statusCode(200)
-                .statusLine("HTTP/1.1 200 OK");
+    System.out.println("status code :"+  response.getStatusCode());
+    System.out.println("contentype :"+ response.getContentType());
+    System.out.println("statusline : "+  response.statusLine());
 
 
 
 
-    }
+      response.then().assertThat()
+              .statusCode(200)
+              .contentType("application/json")
+              .statusLine("HTTP/1.1 200 OK");
+
 }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
